@@ -25,7 +25,7 @@ public class DocumentOverwriteTest {
         // given
         String contentToBeOverwritten = "The quick brown fox";
         String expected = "The quick browner fox";
-        Document documentWriter = new Document(fileName);
+        Document documentWriter = new Document(fileName, fileReader);
         documentWriter.write(contentToBeOverwritten);
 
         // when
@@ -41,7 +41,7 @@ public class DocumentOverwriteTest {
         // given
         String contentToBeOverwritten = "The quick brown fox";
         String expected = "The quick brownest fox";
-        Document documentWriter = new Document(fileName);
+        Document documentWriter = new Document(fileName, fileReader);
         documentWriter.write(contentToBeOverwritten);
 
         // when

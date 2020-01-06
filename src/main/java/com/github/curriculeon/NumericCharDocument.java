@@ -7,7 +7,7 @@ import java.io.IOException;
  */
 public class NumericCharDocument extends Document {
     public NumericCharDocument(String fileName) throws IOException {
-        super(fileName);
+        super(fileName, fileReader);
     }
 
     @Override
