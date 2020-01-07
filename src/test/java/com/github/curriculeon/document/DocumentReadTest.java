@@ -23,7 +23,7 @@ public class DocumentReadTest {
     @Test
     public void testRead1() throws IOException {
         // given
-        Document documentWriter = new Document(fileName, fileReader);
+        Document documentWriter = new Document(fileName);
         String expected = "The\nquick\nbrown\nfox";
         documentWriter.write(expected);
 
@@ -37,7 +37,7 @@ public class DocumentReadTest {
     @Test
     public void testRead2() throws IOException {
         // given
-        Document documentWriter = new Document(fileName, fileReader);
+        Document documentWriter = new Document(fileName);
         String expected = "The\nquicker\nbrown\nfox";
         documentWriter.write(expected);
 

@@ -25,7 +25,7 @@ public class DocumentToStringTest {
     public void toStringTest1() throws IOException {
         // given
         String contentToBeWritten = "The quick brown fox";
-        Document documentWriter = new Document(fileName, fileReader);
+        Document documentWriter = new Document(fileName);
         String expected = new StringBuilder(fileName)
                 .append("{")
                 .append(contentToBeWritten)
@@ -44,7 +44,7 @@ public class DocumentToStringTest {
     public void toStringTest2() throws IOException {
         // given
         String contentToBeWritten = "The quicker browner fox";
-        Document documentWriter = new Document(fileName, fileReader);
+        Document documentWriter = new Document(fileName);
         String expected = new StringBuilder(fileName)
                 .append("{")
                 .append(contentToBeWritten)

@@ -26,7 +26,7 @@ public class DocumentWriteTest {
     public void writeAlphaValuesTest() throws IOException {
         // given
         String expected = "The quick brown fox";
-        Document documentWriter = new Document(fileName, fileReader);
+        Document documentWriter = new Document(fileName);
 
         // when
         documentWriter.write(expected);
@@ -40,7 +40,7 @@ public class DocumentWriteTest {
     public void writeSpecialCharactersTest() throws IOException {
         // given
         String expected = "()";
-        Document documentWriter = new Document(fileName, fileReader);
+        Document documentWriter = new Document(fileName);
 
         // when
         documentWriter.write(expected);
@@ -54,7 +54,7 @@ public class DocumentWriteTest {
     public void writeNumericValuesTest() throws IOException {
         // given
         String expected = "123";
-        Document documentWriter = new Document(fileName, fileReader);
+        Document documentWriter = new Document(fileName);
 
         // when
         documentWriter.write(expected);

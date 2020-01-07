@@ -24,7 +24,7 @@ public class DocumentReadLineTest {
     public void testReadFirstLine() throws IOException {
         // given
         String expected = "The";
-        Document documentWriter = new Document(fileName, fileReader);
+        Document documentWriter = new Document(fileName);
         String contentToBeWritten = "The\nquick\nbrown\nfox";
         documentWriter.write(contentToBeWritten);
 
@@ -40,7 +40,7 @@ public class DocumentReadLineTest {
     public void testReadSecondLine() throws IOException {
         // given
         String expected = "quick";
-        Document documentWriter = new Document(fileName, fileReader);
+        Document documentWriter = new Document(fileName);
         String contentToBeWritten = "The\nquick\nbrown\nfox";
         documentWriter.write(contentToBeWritten);
 

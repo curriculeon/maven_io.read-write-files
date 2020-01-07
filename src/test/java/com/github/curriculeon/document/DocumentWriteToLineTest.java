@@ -33,6 +33,7 @@ public class DocumentWriteToLineTest {
 
         // when
         documentWriter.write(1, replacement);
+        documentWriter.closeWriteStream();
 
         // then
         Assert.assertEquals(expected, documentWriter.read());

@@ -1,5 +1,6 @@
 package com.github.curriculeon;
 
+import javax.print.Doc;
 import java.io.*;
 import java.util.List;
 
@@ -26,6 +27,8 @@ public class Document implements DocumentInterface {
     public void write(String contentToBeWritten) {
         try {
             fileWriter.write(contentToBeWritten);
+            fileWriter.flush();
+            //fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,25 +37,28 @@ public class Document implements DocumentInterface {
     @Override
     public void write(Integer lineNumber, String valueToBeWritten) {
 
-            int lineNum = 0;
-            int startIndex = 0;
-            int endIndex = valueToBeWritten.indexOf("\n");
+        String value = read();
+        String newValue = "";
+        int lineNum = 0;
+        int startIndex = 0;
+        int endIndex = value.indexOf("\n");
 
-            String valueToReplace = valueToBeWritten.substring(startIndex, endIndex);
+        String valueToReplace = value.substring(startIndex, endIndex);
 
-            while (endIndex != -1 ) {
-                if (lineNum == lineNumber) {
-                    valueToBeWritten.replaceAll(valueToReplace, valueToBeWritten);
-                    break;
-                }
-                startIndex = ++endIndex;
-                endIndex = valueToBeWritten.indexOf("\n");
-                lineNum++;
+        while (endIndex != -1 ) {
+            if (lineNum == lineNumber) {
+                newValue = value.replaceAll(valueToReplace, valueToBeWritten);
+                break;
             }
-            if (endIndex == -1)
-                valueToBeWritten.replaceAll(valueToBeWritten.substring(startIndex, valueToBeWritten.length()), valueToBeWritten);
+            startIndex = endIndex + 1;
+            endIndex += (value.substring(startIndex, value.length()).indexOf("\n") + 1);
+            valueToReplace = value.substring(startIndex, endIndex);
+            lineNum++;
+        }
+        if (endIndex == -1)
+            value.replaceAll(value.substring(startIndex, value.length()), valueToBeWritten);
 
-            write(valueToBeWritten);
+        write(newValue);
     }
 
     @Override
@@ -82,7 +88,7 @@ public class Document implements DocumentInterface {
             int data = fileReader.read();
             while (data != -1)
             {
-                result += Character.toString(Character.forDigit(data, 10));
+                result += Character.toString((char)data);
                 data = fileReader.read();
             }
         } catch (IOException e) {
@@ -105,11 +111,33 @@ public class Document implements DocumentInterface {
 
     @Override
     public File getFile() {
-        return null;
+        return file;
     }
 
     @Override
     public String toString() {
         return null;
     }
+
+    public void closeWriteStream()
+    {
+        try {
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+   /*public static void main(String [] args)
+    {
+        String s = "The\nquick\nbrown\nfox";
+        try {
+            Document document = new Document("target/file.txt");
+            document.write(s);
+            document.write(1, "test");
+            //System.out.println(document.read());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
 }

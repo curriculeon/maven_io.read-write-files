@@ -7,7 +7,7 @@ import java.io.IOException;
  */
 public class AlphaCharDocument extends Document {
     public AlphaCharDocument(String fileName) throws IOException {
-        super(fileName, fileReader);
+        super(fileName);
     }
 
     @Override
