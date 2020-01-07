@@ -14,12 +14,16 @@ public class Document implements DocumentInterface {
     private final File file;
 
     public Document(String fileName) throws IOException {
-        this(new File(fileName));
+        //this(new File(fileName));
+        file = new File(fileName);
+        fileWriter = new FileWriter(fileName);
+        fileReader = new FileReader(fileName);
+
     }
 
     public Document(File file) throws IOException {
         this.file = file;
-        this.fileWriter = new FileWriter(file);
+        this.fileWriter = new FileWriter(file.getPath());
         this.fileReader = new FileReader(file);
     }
 
@@ -103,6 +107,8 @@ public class Document implements DocumentInterface {
 
     @Override
     public void overWrite(String content) {
+        getFile().delete();
+        //write(content);
     }
 
     public List<String> toList() {
@@ -128,16 +134,26 @@ public class Document implements DocumentInterface {
         }
     }
 
-   /*public static void main(String [] args)
+    public void closeReadStream()
     {
-        String s = "The\nquick\nbrown\nfox";
+        try {
+            fileReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+   public static void main(String [] args)
+    {
+        String s = "The quick brown fox";
         try {
             Document document = new Document("target/file.txt");
             document.write(s);
-            document.write(1, "test");
+            document.overWrite(s);
+            document.write("test");
             //System.out.println(document.read());
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }

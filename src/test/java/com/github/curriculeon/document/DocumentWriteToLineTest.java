@@ -37,6 +37,7 @@ public class DocumentWriteToLineTest {
 
         // then
         Assert.assertEquals(expected, documentWriter.read());
+        documentWriter.closeReadStream();
     }
 
     @Test
@@ -51,8 +52,10 @@ public class DocumentWriteToLineTest {
 
         // when
         documentWriter.write(0, replacement);
+        documentWriter.closeWriteStream();
 
         // then
         Assert.assertEquals(expected, documentWriter.read());
+        documentWriter.closeReadStream();
     }
 }

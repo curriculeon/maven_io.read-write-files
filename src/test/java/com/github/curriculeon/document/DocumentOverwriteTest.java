@@ -13,11 +13,13 @@ import java.io.IOException;
  */
 public class DocumentOverwriteTest {
     private String fileName;
+    private File file;
 
     @Before
     public void setup() {
         this.fileName = "target/file.txt";
         new File(fileName).delete();
+
     }
 
     @Test
@@ -30,6 +32,8 @@ public class DocumentOverwriteTest {
 
         // when
         documentWriter.overWrite(expected);
+        //documentWriter.closeWriteStream();
+
         String actual = documentWriter.read();
 
         // then
