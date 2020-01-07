@@ -75,8 +75,8 @@ public class Document implements DocumentInterface {
         int endIndex = temp.indexOf("\n");
 
         while (lineNum != lineNumber){
-            startIndex = ++endIndex;
-            endIndex = temp.indexOf("\n");
+            startIndex = endIndex + 1;
+            endIndex += (temp.substring(startIndex).indexOf("\n") + 1);
             lineNum++;
         }
 
@@ -107,8 +107,13 @@ public class Document implements DocumentInterface {
 
     @Override
     public void overWrite(String content) {
-        getFile().delete();
-        //write(content);
+        try {
+            new FileWriter(file.getPath(), false).close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        write(content);
+
     }
 
     public List<String> toList() {
