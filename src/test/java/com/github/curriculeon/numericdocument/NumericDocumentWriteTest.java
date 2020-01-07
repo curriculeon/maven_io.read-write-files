@@ -27,30 +27,34 @@ public class NumericDocumentWriteTest {
     public void writeNumericValuesToFile() throws IOException {
         // given
         String contentToBeWritten = "123";
-        Document documentWriter = new NumericCharDocument(fileName);
+        Document documentWriter = new Document(fileName);
 
         // when
-        documentWriter.write(contentToBeWritten);
+        documentWriter.writeNumbers(contentToBeWritten);
+        String actual = documentWriter.read();
+
+        //then
+        Assert.assertEquals(contentToBeWritten, actual);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void writeSpecialCharacter() throws IOException {
         // given
         String contentToBeWritten = "()";
-        Document documentWriter = new NumericCharDocument(fileName);
+        Document documentWriter = new Document(fileName);
 
         // when
-        documentWriter.write(contentToBeWritten);
+        documentWriter.writeNumbers(contentToBeWritten);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void writeAlphaValuesTest() throws IOException {
         // given
         String expected = "The quick brown foxy";
-        Document documentWriter = new NumericCharDocument(fileName);
+        Document documentWriter = new Document(fileName);
 
         // when
-        documentWriter.write(expected);
+        documentWriter.writeNumbers(expected);
         String actual = documentWriter.read();
 
         // then

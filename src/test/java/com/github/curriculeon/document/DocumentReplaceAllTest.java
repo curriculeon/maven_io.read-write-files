@@ -33,9 +33,13 @@ public class DocumentReplaceAllTest {
 
         // when
         documentWriter.replaceAll(valueToReplace, replacementValue);
+        String trimmedValue = documentWriter.read().trim();
+        documentWriter.overWrite(trimmedValue);
+        documentWriter.closeWriteStream();
 
         // then
         String actual = documentWriter.read();
+        documentWriter.closeReadStream();
         Assert.assertEquals(expected, actual);
     }
 

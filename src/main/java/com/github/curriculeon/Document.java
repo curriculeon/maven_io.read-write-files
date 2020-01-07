@@ -28,11 +28,62 @@ public class Document implements DocumentInterface {
     }
 
     @Override
-    public void write(String contentToBeWritten) {
+    public void write(String contentToBeWritten) throws IllegalArgumentException {
+        int index = 0;
+        while (index < contentToBeWritten.length()) {
+            if (Character.isDigit(contentToBeWritten.charAt(index)))
+                throw new IllegalArgumentException("This is IllegalArgumentException");
+            if (!Character.isLetterOrDigit(contentToBeWritten.charAt(index))) {
+                if (contentToBeWritten.charAt(index) == ' ') {
+                } else
+                    throw new IllegalArgumentException("This is IllegalArgumentException");
+            }
+            index++;
+        }
+
         try {
             fileWriter.write(contentToBeWritten);
             fileWriter.flush();
-            //fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeNumbers(String valueToBeWritten)
+    {
+        int index = 0;
+        while (index < valueToBeWritten.length()) {
+            if (Character.isLetter(valueToBeWritten.charAt(index)))
+                throw new IllegalArgumentException("This is IllegalArgumentException");
+            if (!Character.isLetterOrDigit(valueToBeWritten.charAt(index))) {
+                if (valueToBeWritten.charAt(index) == ' ') {
+                } else
+                    throw new IllegalArgumentException("This is IllegalArgumentException");
+            }
+            index++;
+        }
+
+        try {
+            fileWriter.write(valueToBeWritten);
+            fileWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeSpecialChars(String valueToBeWritten)
+    {
+        int index = 0;
+        while (index < valueToBeWritten.length()) {
+
+            if (Character.isLetterOrDigit(valueToBeWritten.charAt(index)) || (valueToBeWritten.charAt(index) == ' '))
+                throw new IllegalArgumentException("This is IllegalArgumentException");
+            index++;
+        }
+
+        try {
+            fileWriter.write(valueToBeWritten);
+            fileWriter.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -103,6 +154,9 @@ public class Document implements DocumentInterface {
 
     @Override
     public void replaceAll(String stringToReplace, String replacementString) {
+        String temp = read();
+        String replacedString = temp.replaceAll(stringToReplace, replacementString);
+        overWrite(replacedString);
     }
 
     @Override
@@ -127,7 +181,12 @@ public class Document implements DocumentInterface {
 
     @Override
     public String toString() {
-        return null;
+        String valueToBeRead = read();
+        StringBuilder stringBuilder = new StringBuilder(file.getPath())
+                .append("{")
+                .append(valueToBeRead)
+                .append("}");
+        return stringBuilder.toString();
     }
 
     public void closeWriteStream()
@@ -148,17 +207,14 @@ public class Document implements DocumentInterface {
         }
     }
 
-   public static void main(String [] args)
+   /* public static void main(String [] args)
     {
-        String s = "The quick brown fox";
+        String s = "tyu";
         try {
             Document document = new Document("target/file.txt");
             document.write(s);
-            document.overWrite(s);
-            document.write("test");
-            //System.out.println(document.read());
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

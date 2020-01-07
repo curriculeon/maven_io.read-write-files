@@ -1,6 +1,5 @@
 package com.github.curriculeon.alphadocument;
 
-import com.github.curriculeon.AlphaCharDocument;
 import com.github.curriculeon.Document;
 import org.junit.Assert;
 import org.junit.Before;
@@ -25,7 +24,7 @@ public class AlphaDocumentWriteTest {
     public void writeNumericValuesToFile() throws IOException {
         // given
         String contentToBeWritten = "123";
-        Document documentWriter = new AlphaCharDocument(fileName);
+        Document documentWriter = new Document(fileName);
 
         // when
         documentWriter.write(contentToBeWritten);
@@ -35,7 +34,7 @@ public class AlphaDocumentWriteTest {
     public void writeSpecialCharacter() throws IOException {
         // given
         String contentToBeWritten = "()";
-        Document documentWriter = new AlphaCharDocument(fileName);
+        Document documentWriter = new Document(fileName);
 
         // when
         documentWriter.write(contentToBeWritten);
@@ -46,7 +45,7 @@ public class AlphaDocumentWriteTest {
     public void writeAlphaValuesTest() throws IOException {
         // given
         String expected = "The quick brown foxy";
-        Document documentWriter = new AlphaCharDocument(fileName);
+        Document documentWriter = new Document(fileName);
 
         // when
         documentWriter.write(expected);
