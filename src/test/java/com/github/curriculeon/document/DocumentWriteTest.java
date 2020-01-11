@@ -43,7 +43,7 @@ public class DocumentWriteTest {
         Document documentWriter = new Document(fileName);
 
         // when
-        documentWriter.write(expected);
+        documentWriter.writeSpecialChars(expected);
         String actual = documentWriter.read();
 
         // then
@@ -57,7 +57,7 @@ public class DocumentWriteTest {
         Document documentWriter = new Document(fileName);
 
         // when
-        documentWriter.write(expected);
+        documentWriter.writeNumbers(expected);
         String actual = documentWriter.read();
 
         // then

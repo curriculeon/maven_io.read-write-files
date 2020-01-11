@@ -29,6 +29,16 @@ public class Document implements DocumentInterface {
 
     @Override
     public void write(String contentToBeWritten) throws IllegalArgumentException {
+
+        try {
+            fileWriter.write(contentToBeWritten);
+            fileWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeNew(String contentToBeWritten) throws IllegalArgumentException {
         int index = 0;
         while (index < contentToBeWritten.length()) {
             if (Character.isDigit(contentToBeWritten.charAt(index)))
@@ -206,15 +216,4 @@ public class Document implements DocumentInterface {
             e.printStackTrace();
         }
     }
-
-   /* public static void main(String [] args)
-    {
-        String s = "tyu";
-        try {
-            Document document = new Document("target/file.txt");
-            document.write(s);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
 }

@@ -27,7 +27,7 @@ public class AlphaDocumentWriteTest {
         Document documentWriter = new Document(fileName);
 
         // when
-        documentWriter.write(contentToBeWritten);
+        documentWriter.writeNew(contentToBeWritten);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -37,7 +37,7 @@ public class AlphaDocumentWriteTest {
         Document documentWriter = new Document(fileName);
 
         // when
-        documentWriter.write(contentToBeWritten);
+        documentWriter.writeNew(contentToBeWritten);
     }
 
 
