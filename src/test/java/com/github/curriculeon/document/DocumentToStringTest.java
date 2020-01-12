@@ -16,7 +16,7 @@ public class DocumentToStringTest {
 
     @Before
     public void setup() {
-        this.fileName = "target/file.txt";
+        this.fileName = "target\\file.txt";
         new File(fileName).delete();
     }
 

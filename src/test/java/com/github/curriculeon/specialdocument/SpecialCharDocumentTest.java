@@ -31,7 +31,7 @@ public class SpecialCharDocumentTest {
         Document documentWriter = new SpecialCharDocument(fileName);
 
         // when
-        documentWriter.write(contentToBeWritten);
+        documentWriter.writeSpecialChars(contentToBeWritten);
     }
 
     @Test
@@ -39,10 +39,14 @@ public class SpecialCharDocumentTest {
         // given
         String fileName = "target/file.txt";
         String contentToBeWritten = "()";
-        Document documentWriter = new SpecialCharDocument(fileName);
+        Document documentWriter = new Document(fileName);
 
         // when
-        documentWriter.write(contentToBeWritten);
+        documentWriter.writeSpecialChars(contentToBeWritten);
+        String actual = documentWriter.read();
+
+        //then
+        Assert.assertEquals(contentToBeWritten, actual);
     }
 
 
@@ -54,7 +58,11 @@ public class SpecialCharDocumentTest {
         Document documentWriter = new SpecialCharDocument(fileName);
 
         // when
-        documentWriter.write(contentToBeWritten);
+        documentWriter.writeSpecialChars(contentToBeWritten);
+        String actual = documentWriter.read();
+
+        //then
+        Assert.assertEquals(contentToBeWritten, actual);
     }
 
 
@@ -66,7 +74,7 @@ public class SpecialCharDocumentTest {
         Document documentWriter = new SpecialCharDocument(fileName);
 
         // when
-        documentWriter.write(expected);
+        documentWriter.writeSpecialChars(expected);
         String actual = documentWriter.read();
 
         // then

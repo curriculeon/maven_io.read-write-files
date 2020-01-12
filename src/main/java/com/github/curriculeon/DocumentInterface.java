@@ -7,7 +7,7 @@ import java.util.List;
  * @author leon on 16/11/2018.
  */
 public interface DocumentInterface {
-    void write(String contentToBeWritten);
+    void write(String contentToBeWritten) throws IllegalArgumentException;
 
     void write(Integer lineNumber, String valueToBeWritten);
 

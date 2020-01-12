@@ -13,11 +13,13 @@ import java.io.IOException;
  */
 public class DocumentOverwriteTest {
     private String fileName;
+    private File file;
 
     @Before
     public void setup() {
         this.fileName = "target/file.txt";
         new File(fileName).delete();
+
     }
 
     @Test
@@ -29,8 +31,14 @@ public class DocumentOverwriteTest {
         documentWriter.write(contentToBeOverwritten);
 
         // when
+
         documentWriter.overWrite(expected);
+        String contentToRead = documentWriter.read();
+        contentToRead = contentToRead.trim();
+        documentWriter.overWrite(contentToRead);
         String actual = documentWriter.read();
+        documentWriter.closeWriteStream();
+        documentWriter.closeReadStream();
 
         // then
         Assert.assertEquals(expected, actual);
@@ -46,6 +54,9 @@ public class DocumentOverwriteTest {
 
         // when
         documentWriter.overWrite(expected);
+        String contentToRead = documentWriter.read();
+        contentToRead = contentToRead.trim();
+        documentWriter.overWrite(contentToRead);
         String actual = documentWriter.read();
 
         // then
