@@ -69,8 +69,7 @@ public class Document implements DocumentInterface {
 
     @Override
     public void replaceAll(String stringToReplace, String replacementString){
-        String replacedContents = read();
-        replacedContents = replacedContents.replaceAll(stringToReplace, replacementString);
+        String replacedContents = read().replaceAll(stringToReplace, replacementString);
         overWrite(replacedContents);
     }
 
@@ -98,7 +97,6 @@ public class Document implements DocumentInterface {
 
     @Override
     public String toString() {
-        read();
-     return fileNameForTest+'{'+this.contents+'}';
+     return fileNameForTest+'{'+read()+'}';
     }
 }
