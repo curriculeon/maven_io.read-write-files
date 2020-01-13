@@ -52,27 +52,19 @@ public class Document implements DocumentInterface {
 
     @Override
     public String read() throws IOException {
-        String  text    = "";
-        int count=0;
-        for (String str:this.toList()
-             ) {
-            count++;
-            text+=str;
-            if(count!=this.toList().size()){
-                text+="\n";
-            }
-        }
-        return text;
+        return listToString(toList());
     }
 
     public String listToString(List<String> list) {
         StringBuilder result=new StringBuilder();
         int count=0;
         for (String str: list) {
+            count++;
             result.append(str);
             if(count!=list.size()){
                 result.append("\n");
             }
+
         }
         return result.toString();
     }
