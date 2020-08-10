@@ -1,6 +1,7 @@
 package com.github.curriculeon;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,46 +18,102 @@ public class Document implements DocumentInterface {
 
     public Document(File file) throws IOException {
         this.file = file;
-        this.fileWriter = new FileWriter(file);
+        this.fileWriter = new FileWriter(file,false);
     }
 
     @Override
     public void write(String contentToBeWritten) {
+        try {
+            fileWriter.write(contentToBeWritten);
+            fileWriter.flush(); //IOE Exception: stream closed when call the next write(), use flush() instead
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void write(Integer lineNumber, String valueToBeWritten) {
+        try {
+            List<String> myList = this.toList();
+            myList.set(lineNumber, valueToBeWritten); //replace/overwrite the value in list of string
+            write(myList.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public String read(Integer lineNumber) {
+        try {
+            return this.toList().get(lineNumber);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public String read() {
+        String string = "";
+        try {
+            List<String> myList = this.toList();
+            for(String s:myList){
+                string = string + s + "\n";
+            }
+            return string.substring(0,string.length()-1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public void replaceAll(String stringToReplace, String replacementString) {
+        try {
+            List<String> myList = this.toList();
+            List<String> newList = new ArrayList<>();
+            for(String s : myList)
+            {
+                newList.add(s.replaceAll(stringToReplace,replacementString));
+            }
+            write(newList.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void overWrite(String content) {
+        this.write(content);
     }
 
-    public List<String> toList() {
-        return null;
+    public List<String> toList() throws IOException{
+        List<String> myList = new ArrayList<>();
+        FileReader inputStream = null;
+        try {
+            inputStream = new FileReader(file);
+            BufferedReader bufferStream = new BufferedReader(inputStream);
+            String l;
+            while((l = bufferStream.readLine()) != null){
+                myList.add(l);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (inputStream != null){
+                inputStream.close();
+            }
+        }
+        return myList;
     }
 
     @Override
     public File getFile() {
-        return null;
+        return file;
     }
 
     @Override
     public String toString() {
-        return null;
+        return file.toString() + "{" + read() + "}";
     }
 }

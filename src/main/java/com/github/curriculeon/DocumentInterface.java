@@ -1,6 +1,7 @@
 package com.github.curriculeon;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public interface DocumentInterface {
 
     void overWrite(String content);
 
-    List<String> toList();
+    List<String> toList() throws IOException;
 
     File getFile();
 

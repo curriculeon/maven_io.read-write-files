@@ -12,6 +12,7 @@ public class AlphaCharDocument extends Document {
 
     @Override
     public void write(String contentToBeWritten) {
+        
     }
 
     private Boolean isAlpha(String s) {
