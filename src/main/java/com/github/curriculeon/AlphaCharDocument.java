@@ -12,10 +12,23 @@ public class AlphaCharDocument extends Document {
 
     @Override
     public void write(String contentToBeWritten) {
-        
+        if(isAlpha(contentToBeWritten)) {
+            super.write(contentToBeWritten);
+        }
+        else {
+            throw new IllegalArgumentException();
+        }
     }
 
     private Boolean isAlpha(String s) {
-        return null;
+        s = s.toLowerCase();
+        char[] charArray = s.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            char ch = charArray[i];
+            if (!(ch >= 'a' && ch <= 'z' || ch == ' ')) {
+                return false;
+            }
+        }
+        return true;
     }
 }

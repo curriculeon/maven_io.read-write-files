@@ -36,7 +36,11 @@ public class Document implements DocumentInterface {
         try {
             List<String> myList = this.toList();
             myList.set(lineNumber, valueToBeWritten); //replace/overwrite the value in list of string
-            write(myList.toString());
+            String string = "";
+            for(String s:myList){
+                string = string + s + "\n";
+            }
+            this.overWrite(string);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -69,22 +73,19 @@ public class Document implements DocumentInterface {
 
     @Override
     public void replaceAll(String stringToReplace, String replacementString) {
-        try {
-            List<String> myList = this.toList();
-            List<String> newList = new ArrayList<>();
-            for(String s : myList)
-            {
-                newList.add(s.replaceAll(stringToReplace,replacementString));
-            }
-            write(newList.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.overWrite(this.read().replaceAll(stringToReplace,replacementString));
     }
 
     @Override
     public void overWrite(String content) {
-        this.write(content);
+        FileWriter outputStream = null;
+        try {
+            outputStream = new FileWriter(file);
+            outputStream.write(content);
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<String> toList() throws IOException{
