@@ -32,6 +32,7 @@ public class SpecialCharDocumentTest {
 
         // when
         documentWriter.write(contentToBeWritten);
+
     }
 
     @Test
@@ -62,14 +63,12 @@ public class SpecialCharDocumentTest {
     public void writeAlphaValuesTest() throws IOException {
         // given
         String fileName = "target/file.txt";
-        String expected = "The quick brown foxy";
+        String content = "The quick brown foxy";
         Document documentWriter = new SpecialCharDocument(fileName);
 
         // when
-        documentWriter.write(expected);
-        String actual = documentWriter.read();
+        documentWriter.write(content);
 
-        // then
-        Assert.assertEquals(expected, actual);
+
     }
 }

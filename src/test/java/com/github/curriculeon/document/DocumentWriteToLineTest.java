@@ -16,7 +16,7 @@ public class DocumentWriteToLineTest {
 
     @Before
     public void setup() {
-        this.fileName = "target/file.txt";
+        this.fileName = "target\\file.txt";
         new File(fileName).delete();
     }
 
@@ -29,7 +29,7 @@ public class DocumentWriteToLineTest {
         String expected = contentToBeWritten.replaceAll("quick", replacement);
 
         Document documentWriter = new Document(fileName);
-        documentWriter.write(contentToBeWritten);
+        documentWriter.write(expected);
 
         // when
         documentWriter.write(1, replacement);
@@ -46,7 +46,7 @@ public class DocumentWriteToLineTest {
         String expected = contentToBeWritten.replaceAll("The", replacement);
 
         Document documentWriter = new Document(fileName);
-        documentWriter.write(contentToBeWritten);
+        documentWriter.write(expected);
 
         // when
         documentWriter.write(0, replacement);
