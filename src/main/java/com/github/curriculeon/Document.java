@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
@@ -38,9 +39,12 @@ public class Document implements DocumentInterface {
 
     @Override
     public void write(Integer lineNumber, String valueToBeWritten) throws IOException {
-        List<String> temp = this.toList();
-        temp.set(lineNumber,valueToBeWritten);
-        this.write(temp.toString());
+        String fileContents = this.read();
+        String[] tempArray = fileContents.split("\n");
+        tempArray[lineNumber] = valueToBeWritten;
+        StringBuilder builder = new StringBuilder();
+        Arrays.stream(tempArray).sequential().forEach(s -> builder.append(s).append("\n"));
+        this.overWrite(builder.toString().trim());
     }
 
     @Override
@@ -67,6 +71,7 @@ public class Document implements DocumentInterface {
 
     @Override
     public void overWrite(String content) throws IOException {
+        this.replaceAll(this.read(),"");
         this.write(content);
 
     }
@@ -88,6 +93,6 @@ public class Document implements DocumentInterface {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return file.toString() + s;
+        return file.toString() + "{"+ s + "}";
     }
 }
