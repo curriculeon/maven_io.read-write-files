@@ -57,27 +57,26 @@ public class Document implements DocumentInterface {
     public String read() throws IOException {
         StringBuilder fileReader = new StringBuilder();
 
-        Files.lines(Paths.get(file.getPath())).forEach(s -> fileReader.append(s).append("\n"));
+        Files.lines(file.toPath()).forEach(s -> fileReader.append(s).append("\n"));
         return fileReader.toString().trim();
     }
 
 
     @Override
     public void replaceAll(String stringToReplace, String replacementString) throws IOException {
-        String content = new String(Files.readAllBytes(Paths.get(file.getPath())));
+        String content = new String(Files.readAllBytes(file.toPath()));
         content = content.replaceAll(stringToReplace, replacementString);
-        Files.write(Paths.get(file.getPath()), content.getBytes());
+        Files.write(file.toPath(), content.getBytes());
     }
 
     @Override
     public void overWrite(String content) throws IOException {
-        this.replaceAll(this.read(),"");
-        this.write(content);
+        Files.write(file.toPath(), content.getBytes());
 
     }
 
     public List<String> toList() throws IOException {
-        return Files.lines(Paths.get(file.getPath())).collect(Collectors.toList());
+        return Files.lines(file.toPath()).collect(Collectors.toList());
     }
 
     @Override
