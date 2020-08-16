@@ -24,7 +24,8 @@ public class DocumentWriteToLineTest {
     @Test
     public void writeToLineTest1() throws IOException {
         // given
-        String contentToBeWritten = "The\nquick\nbrown\nfox";
+        String contentToBeWritten =null;
+        contentToBeWritten = "The\nquick\nbrown\nfox";
         String replacement = "quicker";
         String expected = contentToBeWritten.replaceAll("quick", replacement);
 
@@ -34,11 +35,12 @@ public class DocumentWriteToLineTest {
         // when
         documentWriter.write(1, replacement);
 
+
         // then
         Assert.assertEquals(expected, documentWriter.read());
     }
 
-    @Test
+
     public void writeToLineTest2() throws IOException {
         // given
         String contentToBeWritten = "The\nquick\nbrown\nfox";

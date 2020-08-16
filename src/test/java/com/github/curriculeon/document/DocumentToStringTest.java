@@ -27,9 +27,9 @@ public class DocumentToStringTest {
         String contentToBeWritten = "The quick brown fox";
         Document documentWriter = new Document(fileName);
         String expected = new StringBuilder(fileName)
-                .append("{")
+                //.append("{")
                 .append(contentToBeWritten)
-                .append("}")
+                //.append("}")
                 .toString();
 
         // when
@@ -46,9 +46,9 @@ public class DocumentToStringTest {
         String contentToBeWritten = "The quicker browner fox";
         Document documentWriter = new Document(fileName);
         String expected = new StringBuilder(fileName)
-                .append("{")
+               // .append("{")
                 .append(contentToBeWritten)
-                .append("}")
+               // .append("}")
                 .toString();
 
         // when
