@@ -1,5 +1,6 @@
 package com.github.curriculeon;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -11,10 +12,11 @@ public class AlphaCharDocument extends Document {
     }
 
     @Override
-    public void write(String contentToBeWritten) {
+    public void write(String contentToBeWritten) throws IOException {
+        super.write(contentToBeWritten);
     }
 
     private Boolean isAlpha(String s) {
-        return null;
+        return s.matches("%[a-zA-Z]%");
     }
 }

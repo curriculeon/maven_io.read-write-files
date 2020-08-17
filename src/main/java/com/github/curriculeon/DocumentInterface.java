@@ -1,23 +1,24 @@
 package com.github.curriculeon;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
  * @author leon on 16/11/2018.
  */
 public interface DocumentInterface {
-    void write(String contentToBeWritten);
+    void write(String contentToBeWritten) throws IOException;
 
-    void write(Integer lineNumber, String valueToBeWritten);
+    void write(Integer lineNumber, String valueToBeWritten) throws IOException;
 
-    String read(Integer lineNumber);
+    String read(Integer lineNumber) throws IOException;
 
     String read();
 
-    void replaceAll(String stringToReplace, String replacementString);
+    void replaceAll(String stringToReplace, String replacementString) throws IOException;
 
-    void overWrite(String content);
+    void overWrite(String content) throws IOException;
 
     List<String> toList();
 
