@@ -17,6 +17,6 @@ public class AlphaCharDocument extends Document {
     }
 
     private Boolean isAlpha(String s) {
-        return null;
+        return s.matches("%[a-zA-Z]%");
     }
 }
