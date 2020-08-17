@@ -1,7 +1,12 @@
 package com.github.curriculeon;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author leon on 16/11/2018.
@@ -21,7 +26,9 @@ public class Document implements DocumentInterface {
     }
 
     @Override
-    public void write(String contentToBeWritten) {
+    public void write(String contentToBeWritten) throws IOException {
+        fileWriter.write(contentToBeWritten);
+        fileWriter.flush();
     }
 
     @Override
@@ -30,12 +37,28 @@ public class Document implements DocumentInterface {
 
     @Override
     public String read(Integer lineNumber) {
+
         return null;
     }
 
     @Override
     public String read() {
-        return null;
+        StringBuffer content = new StringBuffer();
+        FileInputStream fs = new FileInputStream(file);
+        while (true){
+            int value = 0;
+            try {
+                value = fs.read();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if(value == -1){
+                break;
+            }
+            content.append((char)value);
+        }
+        String result = content.toString();
+        return result;
     }
 
     @Override
@@ -44,19 +67,24 @@ public class Document implements DocumentInterface {
 
     @Override
     public void overWrite(String content) {
+        this.write(content);
     }
 
     public List<String> toList() {
-        return null;
+        List<String> result;
+        try (Stream<String> lines = Files.lines(Paths.get(file.getPath()))) {
+            result = lines.collect(Collectors.toList());
+        }
+        return result;
     }
 
     @Override
     public File getFile() {
-        return null;
+        return file;
     }
 
     @Override
     public String toString() {
-        return null;
+        return file.toString();
     }
 }
