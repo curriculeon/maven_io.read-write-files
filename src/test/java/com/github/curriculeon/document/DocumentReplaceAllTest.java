@@ -29,6 +29,7 @@ public class DocumentReplaceAllTest {
         String valueToReplace = "e";
         String replacementValue = "_";
         String expected = contentToBeWritten.replaceAll(valueToReplace, replacementValue);
+
         documentWriter.write(contentToBeWritten);
 
         // when
