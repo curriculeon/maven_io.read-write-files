@@ -11,10 +11,14 @@ public class SpecialCharDocument extends Document {
     }
 
     @Override
-    public void write(String contentToBeWritten) {
+    public void write(String contentToBeWritten) throws IOException {
+        if(!isSpecialCharacters(contentToBeWritten))
+            throw new IllegalArgumentException();
+        super.write(contentToBeWritten);
     }
 
     private Boolean isSpecialCharacters(String s) {
-        return null;
+
+        return s.matches("[" + "-/@#!*$%^&.'_+={}()"+ "]+");
     }
 }

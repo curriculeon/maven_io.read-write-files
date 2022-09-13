@@ -11,10 +11,13 @@ public class AlphaCharDocument extends Document {
     }
 
     @Override
-    public void write(String contentToBeWritten) {
+    public void write(String contentToBeWritten) throws  IOException {
+        if(!isAlpha(contentToBeWritten))
+            throw new IllegalArgumentException();
+        super.write(contentToBeWritten);
     }
 
     private Boolean isAlpha(String s) {
-        return null;
+        return s.matches("^[ A-Za-z]+$");
     }
 }
